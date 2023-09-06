@@ -37,25 +37,25 @@ class _ArticleScreenState extends State<ArticleScreen> {
             children: [
               Text(
                 'News',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.black,fontWeight: FontWeight.w600),
               ),
               Text(
                 'App',
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Colors.red,fontWeight: FontWeight.w600),
               )
             ],
           ),
-          actions: [
+          actions: const [
             Opacity(
               opacity: 0,
-              child: Container(
-                child: const Icon(Icons.abc),
+              child: SizedBox(
+                child:  Icon(Icons.abc),
               ),
             )
           ],
           elevation: 0,
         ),
-        body: Container(
+        body: SizedBox(
             child: WebView(
           initialUrl: widget.blogUrl,
           onWebViewCreated: ((WebViewController webViewController) {

@@ -14,4 +14,14 @@ class ArticleModel {
     this.content,
     this.urlToImage,
   });
+
+
+  ArticleModel.fromJson(Map<String, dynamic> json) {
+    author = json["author"];
+    title = json["title"];
+    url = json["url"];
+    description = json["description"];
+    content = json["content"];
+    urlToImage = json["urlToImage"];
+  }
 }

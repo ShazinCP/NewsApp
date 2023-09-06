@@ -75,14 +75,15 @@ class BlogTile extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 16),
         child: Column(
           children: [
+            if(imageUrl != null)
             ClipRRect(
                 borderRadius: BorderRadius.circular(6),
-                child: Image.network(imageUrl)),
+                child: Image.network(imageUrl ?? "https://www.smaroadsafety.com/wp-content/uploads/2022/06/no-pic.png")),
             const SizedBox(
               height: 10,
             ),
             Text(
-              title,
+              title ?? "Text Note Found",
               style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w600,
@@ -92,8 +93,8 @@ class BlogTile extends StatelessWidget {
               height: 10,
             ),
             Text(
-              desc,
-              style: TextStyle(color: Color.fromARGB(123, 51, 46, 46)),
+              desc ?? "Text Not Found",
+              style: const TextStyle(color: Color.fromARGB(123, 51, 46, 46)),
             )
           ],
         ),

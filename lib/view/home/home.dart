@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:news_app/controller/news_provider.dart';
 import 'package:news_app/helper/data.dart';
 import 'package:news_app/model/article/article_model.dart';
-import 'package:news_app/services/news.dart';
 import 'package:news_app/view/home/widget/widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<ArticleModel> articles = <ArticleModel>[];
 
+
   @override
   void initState() {
     super.initState();
@@ -23,16 +23,16 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   getNews() async {
-    News newsClass = News();
-    await newsClass.getNews();
-    articles = newsClass.news;
-    // ignore: use_build_context_synchronously
-    Provider.of<NewsProvider>(context, listen: false).changeLoading(false);
+    // News newsClass = News();
+    // articles = await newsClass.getNews();
+    Provider.of<NewsProvider>(context, listen: false).getAllNews();
+    Provider.of<NewsProvider>(context, listen: false).changeLoading();
   }
+
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -41,11 +41,11 @@ class _HomeScreenState extends State<HomeScreen> {
             children: <Widget>[
               Text(
                 'News',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.black,fontWeight: FontWeight.w600),
               ),
               Text(
                 'App',
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Colors.red,fontWeight: FontWeight.w600),
               )
             ],
           ),
@@ -53,19 +53,19 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: Consumer<NewsProvider>(
           builder: (context, value, child) {
-            // return value.loading
-            //     ? Center(
-            //         child: Container(
-            //           child: const CircularProgressIndicator(),
-            //         ),
-            //       )
-            return SingleChildScrollView(
+            return value.loading
+                ? const Center(
+                    child: SizedBox(
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+            : SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   children: [
                     //categories
-                    Container(
+                    SizedBox(
                       height: 70,
                       child: ListView.builder(
                           itemCount: categories.length,
@@ -80,19 +80,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
 
                     //Blogs
-                    Container(
-                      child: ListView.builder(
-                          itemCount: articles.length,
-                          shrinkWrap: true,
-                          physics: const ClampingScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return BlogTile(
-                              imageUrl: articles[index].urlToImage,
-                              title: articles[index].title,
-                              desc: articles[index].description,
-                              Url: articles[index].url,
-                            );
-                          }),
+                    SizedBox(
+                      child: Consumer<NewsProvider>(
+                        builder: (context, value, child) {
+                           return ListView.builder(
+                            itemCount: value.articles.length,
+                            shrinkWrap: true,
+                            physics: const ClampingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return BlogTile(
+                                imageUrl: value.articles[index].urlToImage,
+                                title: value.articles[index].title,
+                                desc: value.articles[index].description,
+                                Url: value.articles[index].url,
+                              );
+                            });
+                        },
+                       
+                      ),
                     )
                   ],
                 ),
