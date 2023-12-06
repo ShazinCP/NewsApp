@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/helper/colors.dart';
 import 'package:news_app/view/article_view/article_screen.dart';
 import 'package:news_app/view/category_news/category_news.dart';
 
@@ -31,14 +32,14 @@ class CategoryTile extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
-                color: Colors.black26,
+                color: cBlackColor26,
               ),
               width: 120,
               height: 60,
               child: Text(
                 categoryName,
                 style: const TextStyle(
-                    color: Colors.white,
+                    color: cWhiteColor,
                     fontSize: 14,
                     fontWeight: FontWeight.w500),
               ),
@@ -52,7 +53,7 @@ class CategoryTile extends StatelessWidget {
 
 class BlogTile extends StatelessWidget {
   final imageUrl, title, desc, Url;
-  BlogTile(
+  const BlogTile(
       {super.key,
       required this.imageUrl,
       required this.title,
@@ -87,14 +88,14 @@ class BlogTile extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w600,
-                  color: Colors.black87),
+                  color: cBlackColor87),
             ),
             const SizedBox(
               height: 10,
             ),
             Text(
               desc ?? "Text Not Found",
-              style: const TextStyle(color: Color.fromARGB(123, 51, 46, 46)),
+              style: const TextStyle(color: cBlackARGBColor),
             )
           ],
         ),

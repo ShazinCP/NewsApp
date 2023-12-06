@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/controller/news_provider.dart';
+import 'package:news_app/helper/colors.dart';
 import 'package:news_app/view/home/home.dart';
 import 'package:news_app/view/home/widget/widgets.dart';
 import 'package:provider/provider.dart';
@@ -44,20 +45,20 @@ class _CategoryNewsState extends State<CategoryNews> {
             },
             icon: const Icon(
               Icons.arrow_back,
-              color: Colors.black,
+              color: cBlackColor,
             )),
-        backgroundColor: Colors.white,
+        backgroundColor: cWhiteColor,
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'News',
               style:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+                  TextStyle(color: cBlackColor, fontWeight: FontWeight.w600),
             ),
             Text(
               'App',
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.w600),
+              style: TextStyle(color: cRedColor, fontWeight: FontWeight.w600),
             )
           ],
         ),
